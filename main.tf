@@ -30,23 +30,12 @@ resource "alicloud_security_group" "group" {
   vpc_id = "${data.alicloud_vpcs.default.vpcs.0.id}"
 }
 
-resource "alicloud_security_group_rule" "allow_tcp_3389" {
+resource "alicloud_security_group_rule" "allow_tcp_22" {
   type              = "ingress"
   ip_protocol       = "tcp"
   nic_type          = "intranet"
   policy            = "accept"
-  port_range        = "3389/3389"
-  priority          = 1
-  security_group_id = "${alicloud_security_group.group.id}"
-  cidr_ip           = "0.0.0.0/0"
-}
-
-resource "alicloud_security_group_rule" "allow_tcp_5986" {
-  type              = "ingress"
-  ip_protocol       = "tcp"
-  nic_type          = "intranet"
-  policy            = "accept"
-  port_range        = "5986/5986"
+  port_range        = "22/22"
   priority          = 1
   security_group_id = "${alicloud_security_group.group.id}"
   cidr_ip           = "0.0.0.0/0"
